@@ -1,5 +1,6 @@
 const textarea = document.getElementById("main-text");
 const fonttrigger = document.getElementById("font-trigger");
+const body = document.getElementsByTagName("body")[0];
 var bC = fonttrigger.style.backgroundColor;
 var c = fonttrigger.style.color;
 var isFirefox = typeof InstallTrigger !== 'undefined';
@@ -29,10 +30,7 @@ function revertStyle(){
 function checkKey(event){
 	key = event.key;
 	code = event.keyCode;
-	if( key == "Unidentified"){
-		alert("ERROR: unidentified key")
-	}
-	if(event.key == "Tab" || code == 9){
+	if(key == "Tab" || code == 9){
 		event.preventDefault();
 		if(isFirefox) { 
 			textarea.value += "\t";
@@ -41,5 +39,31 @@ function checkKey(event){
 			document.execCommand('insertText', false, "\t");
 		}
 	}
+	else if(key == "Enter" || code == 13){
+		event.preventDefault();
+		tabs = 0;
+		i = textarea.selectionStart - 1;
+		while(textarea.value[i] != "\n" && i >= 0){
+			console.log(i);
+			if(textarea.value[i] == "\t" || textarea.value[i] == "{"){
+				tabs++;
+			}
+			else if(textarea.value[i] == "}"){
+				tabs--;
+			}
+			i--;
+		}
+		if(isFirefox){
+			textarea.value += "\n";
+			for(i = 0; i < tabs; i++){
+				textarea.value += "\t";
+			}
+		}
+		else{
+			document.execCommand('insertText', false, "\n");
+			for(i = 0; i < tabs; i++){
+				document.execCommand('insertText', false, "\t");
+			}
+		}
+	}
 } 
-document.execCommand('insertText', false, "\t");
