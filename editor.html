@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<title>Light Editor</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="editor.css">
+		<link rel="icon" href="tab-image.png">
+	</head>
+	<body>
+		<div id = "top-bar">
+			<div class = "dropdown">
+				<button class = "top-button">File</button>
+				<div class= "top-dropdown">
+					<a id = "a1" target = "_blank"><button class = "dropbutton"  onclick = "downloadFile(textarea.value, 'saved-text.txt','text/plain','a1');">Save</button></a>
+				</div>
+			</div>
+			<div class = "dropdown">
+				<button class = "top-button">Edit</button>
+				<div class= "top-dropdown">
+					<button class = "dropbutton" onclick = "document.execCommand('undo', false, null);">Undo</button>
+					<button class = "dropbutton" onclick = "document.execCommand('redo', false, null);">Redo</button>
+				</div>
+			</div>
+			<div class = "dropdown">
+				<button class = "top-button">View</button>
+				<div class= "top-dropdown">
+					<button id = "font-trigger" >Font</button>
+					<div class = "right-menu" onmouseover = "onHoverChangeStyle();" onmouseout = "revertStyle();">
+						<button class = "rightdropbutton" onclick = "textarea.style.fontFamily = prompt('Enter a font family:', 'Ubuntu');">Family</button>
+						<button class = "rightdropbutton" onclick = "textarea.style.fontSize = prompt('Enter font size (in px):','18');">Size</button>
+						<button class = "rightdropbutton" onclick = "textarea.style.color = prompt('Enter color:','#a6a6a6');">Color</button>
+						<button class = "rightdropbutton" onclick = "textarea.style.backgroundColor = prompt('Enter background color:','#1c1c1c');">Background color</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "left-bar">
+			<img id = "first-left-icon" src = "green-run-button.png" title = "Run text as JavaScript" onclick = "runTextAsJS();">
+		</div>
+		<div id = "push-div"></div>
+		<textarea id = "main-text" onkeydown="checkKey(event);" ></textarea>
+		<script src = "editor.js"></script>
+	</body>
+</html>
