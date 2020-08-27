@@ -40,11 +40,15 @@ function checkKey(event){
 		}
 	}
 	else if(key == "Enter" || code == 13){
+		scroll = false;
+		initial = textarea.selectionStart;
+		if(textarea.value[textarea.selectionStart] == undefined){
+			scroll = true;
+		}
 		event.preventDefault();
 		tabs = 0;
 		i = textarea.selectionStart - 1;
 		while(textarea.value[i] != "\n" && i >= 0){
-			console.log(i);
 			if(textarea.value[i] == "\t" || textarea.value[i] == "{"){
 				tabs++;
 			}
@@ -54,16 +58,25 @@ function checkKey(event){
 			i--;
 		}
 		if(isFirefox){
-			textarea.value += "\n";
+			textbefore = textarea.value.substring(0, textarea.selectionStart);
+			textafter = textarea.value.substring(textarea.selectionStart, textarea.value.length);
+			textbetween = "";
+			textbetween += "\n";
 			for(i = 0; i < tabs; i++){
-				textarea.value += "\t";
+				textbetween += "\t";
 			}
+			textarea.value = textbefore + textbetween + textafter;
+			textarea.selectionStart = textbefore.length + textbetween.length;
+			textarea.selectionEnd = textarea.selectionStart;
 		}
 		else{
 			document.execCommand('insertText', false, "\n");
 			for(i = 0; i < tabs; i++){
 				document.execCommand('insertText', false, "\t");
 			}
+		}
+		if(scroll){
+			textarea.scrollTop = textarea.scrollHeight;
 		}
 	}
 } 
