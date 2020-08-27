@@ -31,17 +31,17 @@
 						<button class = "rightdropbutton" onclick = "textarea.style.fontFamily = prompt('Enter a font family:', 'Ubuntu');">Family</button>
 						<button class = "rightdropbutton" onclick = "textarea.style.fontSize = prompt('Enter font size (in px):','18');">Size</button>
 						<button class = "rightdropbutton" onclick = "textarea.style.color = prompt('Enter color:','#a6a6a6');">Color</button>
-						<button class = "rightdropbutton" onclick = "textarea.style.backgroundColor = prompt('Enter background color:','#1c1c1c');">Background color</button>
+						<button class = "rightdropbutton" onclick = "body.style.backgroundColor = prompt('Enter background color:','#1c1c1c');">Background color</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<div id = "left-bar">
-			<img id = "first-left-icon" src = "green-run-button.png" title = "Run text as JavaScript" onclick = "runTextAsJS();">
+			<img id = "first-left-icon" src = "blue-run-button.png" title = "Run text as JavaScript" onclick = "runTextAsJS();">
 		</div>
 		<div id = "push-div"></div>
-		<textarea id = "main-text" onkeydown="checkKey(event);" ></textarea>
+		<textarea id = "main-text" onkeydown="checkKey(event);"></textarea>
 		<script src = "editor.js"></script>
 	</body>
 </html>
