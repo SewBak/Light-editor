@@ -1,6 +1,6 @@
 const textarea = document.getElementById("main-text");
-const fonttrigger = document.getElementById("font-trigger");
 const body = document.getElementsByTagName("body")[0];
+const fonttrigger = document.getElementById("font-trigger");
 var bC = fonttrigger.style.backgroundColor;
 var c = fonttrigger.style.color;
 var isFirefox = typeof InstallTrigger !== 'undefined';
@@ -17,15 +17,13 @@ function downloadFile(text, name, type, id) {
 	a.href = URL.createObjectURL(file);
 	a.download = name;
 }
-function onHoverChangeStyle(){
-	fonttrigger.style.backgroundColor = "#242424";
-	fonttrigger.style.color = "#4a6eff";
-	fonttrigger.style.borderRight = "2px solid #4a6eff"
+function showObj(id){
+	obj = document.getElementById(id);
+	obj.style.display = "block";
 }
-function revertStyle(){
-	fonttrigger.style.backgroundColor = bC;
-	fonttrigger.style.color = c;
-	fonttrigger.style.border = "2px solid transparent";
+function hideObj(id){
+	obj = document.getElementById(id);
+	obj.style.display = "none";
 }
 function checkKey(event){
 	key = event.key;
