@@ -4,7 +4,7 @@
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<title>Light Editor</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="jquery-3.5.1.min.js"></script>
 		<link rel="stylesheet" href="editor.css">
 		<link rel="icon" href="tab-image.png">
 	</head>
@@ -26,13 +26,19 @@
 			<div class = "dropdown">
 				<button class = "top-button">View</button>
 				<div class= "top-dropdown">
-					<button id = "font-trigger" >Font</button>
-					<div class = "right-menu" onmouseover = "onHoverChangeStyle();" onmouseout = "revertStyle();">
+					<div id = "font-right-menu" onmouseover = "showObj('font-right-menu');" onmouseout = "hideObj('font-right-menu');">
 						<button class = "rightdropbutton" onclick = "textarea.style.fontFamily = prompt('Enter a font family:', 'Ubuntu');">Family</button>
 						<button class = "rightdropbutton" onclick = "textarea.style.fontSize = prompt('Enter font size (in px):','18');">Size</button>
 						<button class = "rightdropbutton" onclick = "textarea.style.color = prompt('Enter color:','#a6a6a6');">Color</button>
+						<button class = "rightdropbutton" onclick = "textarea.style.lineHeight = prompt('Enter line height(in px or %):','120%');">Line height</button>
 						<button class = "rightdropbutton" onclick = "body.style.backgroundColor = prompt('Enter background color:','#1c1c1c');">Background color</button>
 					</div>
+					<button id = "font-trigger" onmouseover = "showObj('font-right-menu');" onmouseout = "hideObj('font-right-menu');">Font</button>
+					<div id = "wrap-right-menu" onmouseover = "showObj('wrap-right-menu');" onmouseout = "hideObj('wrap-right-menu');">
+						<button class = "rightdropbutton" onclick = "textarea.style.whiteSpace = 'normal';">Yes</button>
+						<button class = "rightdropbutton" onclick = "textarea.style.whiteSpace = 'nowrap';">No</button>
+					</div>
+					<button id = "wrap-trigger" onmouseover = "showObj('wrap-right-menu');" onmouseout = "hideObj('wrap-right-menu');">Wrap text</button>
 				</div>
 			</div>
 		</div>
