@@ -107,8 +107,10 @@ a {text-decoration: none; }
 	height:30px;
 	outline:none;
 }
-.dropbutton:hover,#font-trigger:hover, .rightdropbutton:hover, #wrap-trigger:hover{
+.dropbutton:hover, .rightdropbutton:hover{
 	background-color:#242424;
+	-webkit-transition: background-color 150ms linear;
+    transition: background-color 150ms linear;
 	color:#4a6eff;
 }
 .top-dropdown{
@@ -129,6 +131,8 @@ a {text-decoration: none; }
 .dropdown:hover .top-button{
 	color:#4a6eff;
 	border-bottom-color:#4a6eff;
+	-webkit-transition: all 100ms linear;
+    transition: all 100ms linear;
 }
 #first-left-icon{
 	margin-left:8px;
@@ -144,6 +148,8 @@ a {text-decoration: none; }
 }
 #first-left-icon:hover,.left-icon:hover{
 	filter: brightness(200%);
+	-webkit-transition: filter 200ms linear;
+	transition:filter 200ms linear;
 }
 #font-right-menu,#wrap-right-menu{
 	display:none;
@@ -162,5 +168,12 @@ a {text-decoration: none; }
 #wrap-right-menu:hover + #wrap-trigger{
 	background-color: #242424;
 	color : #4a6eff;
+	border-right : 2px solid #4a6eff;
+}
+#font-trigger:hover, #wrap-trigger:hover{
+	background-color:#242424;
+    -webkit-transition: all 150ms linear;
+    transition: all 150ms linear;
+	color:#4a6eff;
 	border-right : 2px solid #4a6eff;
 }
