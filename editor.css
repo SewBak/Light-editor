@@ -5,12 +5,23 @@ body{
 	font-family:Ubuntu;
 }
 a {text-decoration: none; }
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background-color: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #141b52;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #0b0e29;
+}
 #top-bar{
 	float:right;
 	display:flex;
 	width:calc(100% - 40px);
 	height:40px;
-	float:right;
 	background-image:linear-gradient(to right,#333333 70%,#0b0e29 );
 }
 #left-bar{
@@ -27,16 +38,18 @@ a {text-decoration: none; }
 	width:40px;
 }
 #main-text{
+	cursor:auto;
 	padding-left:10px;
 	padding-top:10px;
 	font-family:Ubuntu;
 	font-size:18px;
 	color:#a6a6a6;
+	white-space:nowrap;
 	resize:none;
 	border:none;
 	background-color:transparent;
 	outline:none;
-	height:calc(99% - 40px);
+	height:calc(99.8% - 40px);
 	width:calc(100% - 40px);
 }
 .top-button{
@@ -51,16 +64,30 @@ a {text-decoration: none; }
 	border:2px solid transparent;
 	background-color:transparent;
 }
-.dropbutton, #font-trigger{
+.dropbutton{
 	display:block;
 	margin:auto;
 	background-color: #333333;
 	color: #a6a6a6;
 	font-size: 12px;
+	white-space:nowrap;
+	border:none;
+	padding:0;
+	width:60px;
+	height:30px;
+	outline:none;
+}
+#font-trigger , #wrap-trigger{
+	display:block;
+	margin:auto;
+	background-color: #333333;
+	color: #a6a6a6;
+	font-size: 12px;
+	white-space:nowrap;
+	padding:0;
 	border: none;
 	width:60px;
 	height:30px;
-	margin:auto;
 	outline:none;
 	border:2px solid transparent;
 }
@@ -69,6 +96,7 @@ a {text-decoration: none; }
 	background-color: #333333;
 	color: #a6a6a6;
 	font-size: 12px;
+	padding:10px;
 	border: none;
 	width:auto;
 	white-space:nowrap;
@@ -79,7 +107,7 @@ a {text-decoration: none; }
 	height:30px;
 	outline:none;
 }
-.dropbutton:hover,#font-trigger:hover, .rightdropbutton:hover{
+.dropbutton:hover,#font-trigger:hover, .rightdropbutton:hover, #wrap-trigger:hover{
 	background-color:#242424;
 	color:#4a6eff;
 }
@@ -117,16 +145,22 @@ a {text-decoration: none; }
 #first-left-icon:hover,.left-icon:hover{
 	filter: brightness(200%);
 }
-.right-menu{
+#font-right-menu,#wrap-right-menu{
 	display:none;
 	position:absolute;
-	top:0px;
 	left:60px;
 	width:auto;
 }
-#font-trigger:hover + .right-menu{
+#font-right-menu:hover, #wrap-right-menu:hover{
 	display:block;
 }
-.right-menu:hover{
-	display:block;
+#font-right-menu:hover + #font-trigger{
+	background-color: #242424;
+	color : #4a6eff;
+	border-right : 2px solid #4a6eff;
+}
+#wrap-right-menu:hover + #wrap-trigger{
+	background-color: #242424;
+	color : #4a6eff;
+	border-right : 2px solid #4a6eff;
 }
