@@ -20,6 +20,7 @@ a {text-decoration: none; }
 #top-bar{
 	float:right;
 	display:flex;
+	padding:0;
 	width:calc(100% - 40px);
 	height:40px;
 	background-image:linear-gradient(to right,#333333 70%,#0b0e29 );
@@ -73,7 +74,8 @@ a {text-decoration: none; }
 	white-space:nowrap;
 	border:none;
 	padding:0;
-	width:60px;
+	width:100%;
+	min-width:60px;
 	height:30px;
 	outline:none;
 }
@@ -110,20 +112,21 @@ a {text-decoration: none; }
 .dropbutton:hover, .rightdropbutton:hover{
 	background-color:#242424;
 	-webkit-transition: background-color 150ms linear;
-    	transition: background-color 150ms linear;
+    transition: background-color 150ms linear;
 	color:#4a6eff;
 }
 .top-dropdown{
 	display: none;
-	position: absolute;
+	position: relative;
 	background-color: transparent;
-	width:60px;
+	width:inherit;
 	z-index: 1;
 }
 .dropdown {
 	position: relative;
 	display: inline-block;
-	width:60px;
+	width:auto;
+	min-width:60px;
 }
 .dropdown:hover .top-dropdown{
 	display:block;
@@ -132,7 +135,7 @@ a {text-decoration: none; }
 	color:#4a6eff;
 	border-bottom-color:#4a6eff;
 	-webkit-transition: all 100ms linear;
-    	transition: all 100ms linear;
+    transition: all 100ms linear;
 }
 #first-left-icon{
 	margin-left:8px;
@@ -146,7 +149,7 @@ a {text-decoration: none; }
 	width:24px;
 	height:auto;
 }
-#first-left-icon:hover,.left-icon:hover{
+#first-left-icon:hover,.left-icon:hover, #find-close:hover{
 	filter: brightness(200%);
 	-webkit-transition: filter 200ms linear;
 	transition:filter 200ms linear;
@@ -172,8 +175,42 @@ a {text-decoration: none; }
 }
 #font-trigger:hover, #wrap-trigger:hover{
 	background-color:#242424;
-    	-webkit-transition: all 150ms linear;
-    	transition: all 150ms linear;
+    -webkit-transition: all 150ms linear;
+    transition: all 150ms linear;
 	color:#4a6eff;
 	border-right : 2px solid #4a6eff;
+}
+#find-div{
+	position:absolute;
+	right:0px;
+	display: none;
+	width:25%;
+	float:right;
+	height:inherit;
+	margin-right:20px;
+	justify-content: center;
+	align-items: center;
+}
+#find-p{
+	display:inline-block;
+	font-size:18px;
+	color:#bdbdbd;
+}
+#find-input{
+	display:inline-block;
+	margin-left:3px;
+	width:70%;
+	height:60%;
+	font-family:Ubuntu;
+	outline:none;
+	background-color:transparent;
+	border:1px solid #a6a6a6;
+	border-radius:0 20px 20px 0;
+	color:#a6a6a6;
+}
+#find-close{
+	margin-left:10px;
+	display:inline-block;
+	min-width:15px;
+	width:15px;
 }
