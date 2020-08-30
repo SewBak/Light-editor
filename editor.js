@@ -1,9 +1,13 @@
 const textarea = document.getElementById("main-text");
 const body = document.getElementsByTagName("body")[0];
 const fonttrigger = document.getElementById("font-trigger");
+const finddiv = document.getElementById("find-div");
 var bC = fonttrigger.style.backgroundColor;
 var c = fonttrigger.style.color;
 var isFirefox = typeof InstallTrigger !== 'undefined';
+window.continueArr = false;
+window.arrcount = -1;
+window.found = [];
 if(isFirefox){
 	alert("You are on an unsupported browser.\nThe buttons 'Undo' and 'Redo' in the 'Edit' section will not work.\nCTRL+Z and CTRl+Y still work (also avoid using TABs)")
 }
@@ -38,6 +42,17 @@ function checkKey(event){
 		}
 	}
 	else if(key == "Enter" || code == 13){
+		event.preventDefault();
+		if(arrcount >= found.length){
+			arrcount = 0;
+			continueArr = false;
+			textarea.selectionStart = textarea.selectionEnd;
+		}
+		if(continueArr){
+			textarea.setSelectionRange(found[arrcount][0], found[arrcount][1] + 1);
+			arrcount++;
+			return;
+		}
 		scroll = false;
 		initial = textarea.selectionStart;
 		if(textarea.value[textarea.selectionStart] == undefined){
@@ -77,4 +92,46 @@ function checkKey(event){
 			textarea.scrollTop = textarea.scrollHeight;
 		}
 	}
-} 
+}
+function find(str,event, input){
+	str = str.toLowerCase();
+	if ((event.keyCode == 13 || event.key == "Enter") && laststr != str){
+		event.preventDefault();
+		arrcount = 0;
+		continueArr = false;
+		txt = textarea.value;
+		strarr = [];
+		window.found = [];
+		inword = false;
+		start = 0;
+		end = 0;
+		j = 0;
+		for(i = 0; i < txt.length; i++){
+			if(txt[i].toLowerCase() != str[j]){
+				start = 0;
+				j = 0;
+				continue;
+			}
+			else{
+				if(j == 0){
+					start = i;
+				}
+				else if(j == str.length - 1){
+					end = i;
+					found.push([start,end]);
+					start = 0;
+					j = 0;
+					continue;
+				}
+				j++;
+			}
+		}
+		textarea.focus();
+		textarea.setSelectionRange(found[0][0], found[0][1] + 1);
+		if(typeof found[1] != "undefined"){
+			arrcount = 1;
+			continueArr = true;
+		}
+	}
+	window.laststr = str;
+}
