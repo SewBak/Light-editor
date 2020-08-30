@@ -24,6 +24,12 @@
 				</div>
 			</div>
 			<div class = "dropdown">
+				<button class = "top-button">Search</button>
+				<div class= "top-dropdown">
+					<button class = "dropbutton" onclick = "finddiv.style.display = 'flex'; alert('Info: To go to the next piece of text found, continuously press Enter')">Find</button>
+				</div>
+			</div>
+			<div class = "dropdown">
 				<button class = "top-button">View</button>
 				<div class= "top-dropdown">
 					<div id = "font-right-menu" onmouseover = "showObj('font-right-menu');" onmouseout = "hideObj('font-right-menu');">
@@ -40,6 +46,11 @@
 					</div>
 					<button id = "wrap-trigger" onmouseover = "showObj('wrap-right-menu');" onmouseout = "hideObj('wrap-right-menu');">Wrap text</button>
 				</div>
+			</div>
+			<div id = "find-div">
+				<p id = "find-p">Find:</p>
+				<input type = "text" id = "find-input" onkeydown = "find(this.value, event, this)">
+				<img id = "find-close" src = "x-cross.png" title = "Close Find tool" onclick = "finddiv.style.display = 'none';">
 			</div>
 		</div>
 		
