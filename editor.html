@@ -40,6 +40,11 @@
 						<button class = "rightdropbutton" onclick = "body.style.backgroundColor = prompt('Enter background color:','#1c1c1c');">Background color</button>
 					</div>
 					<button id = "font-trigger" onmouseover = "showObj('font-right-menu');" onmouseout = "hideObj('font-right-menu');">Font</button>
+					<div id = "ui-right-menu" onmouseover = "showObj('ui-right-menu');" onmouseout = "hideObj('ui-right-menu');">
+						<button class = "rightdropbutton" onclick = "topbar.style.height = prompt('Enter width(in px):','40px'); textarea.style.height = 'calc(99.8% - ' + topbar.style.height + ')';">Top bar width</button>
+						<button class = "rightdropbutton" onclick = "leftbar.style.width = prompt('Enter width(in px):','40px'); textarea.style.width = 'calc(100% - ' + leftbar.style.width + ')'; pushdiv.style.width = leftbar.style.width; topbar.style.width = 'calc(100% - ' + leftbar.style.width + ')';">Left bar width</button>
+					</div>
+					<button id = "ui-trigger" onmouseover = "showObj('ui-right-menu');" onmouseout = "hideObj('ui-right-menu');">UI</button>
 					<div id = "wrap-right-menu" onmouseover = "showObj('wrap-right-menu');" onmouseout = "hideObj('wrap-right-menu');">
 						<button class = "rightdropbutton" onclick = "textarea.style.whiteSpace = 'normal';">Yes</button>
 						<button class = "rightdropbutton" onclick = "textarea.style.whiteSpace = 'nowrap';">No</button>
