@@ -2,6 +2,9 @@ const textarea = document.getElementById("main-text");
 const body = document.getElementsByTagName("body")[0];
 const fonttrigger = document.getElementById("font-trigger");
 const finddiv = document.getElementById("find-div");
+const topbar = document.getElementById("top-bar");
+const leftbar = document.getElementById("left-bar");
+const pushdiv = document.getElementById("push-div");
 var bC = fonttrigger.style.backgroundColor;
 var c = fonttrigger.style.color;
 var isFirefox = typeof InstallTrigger !== 'undefined';
@@ -95,7 +98,7 @@ function checkKey(event){
 }
 function find(str,event, input){
 	str = str.toLowerCase();
-	if ((event.keyCode == 13 || event.key == "Enter") && laststr != str){
+	if (event.keyCode == 13 || event.key == "Enter"){
 		event.preventDefault();
 		arrcount = 0;
 		continueArr = false;
@@ -106,24 +109,33 @@ function find(str,event, input){
 		start = 0;
 		end = 0;
 		j = 0;
-		for(i = 0; i < txt.length; i++){
-			if(txt[i].toLowerCase() != str[j]){
-				start = 0;
-				j = 0;
-				continue;
-			}
-			else{
-				if(j == 0){
-					start = i;
-				}
-				else if(j == str.length - 1){
-					end = i;
-					found.push([start,end]);
+		if(str.length >= 2){
+			for(i = 0; i < txt.length; i++){
+				if(txt[i].toLowerCase() != str[j]){
 					start = 0;
 					j = 0;
 					continue;
 				}
-				j++;
+				else{
+					if(j == 0){
+						start = i;
+					}
+					else if(j == str.length - 1){
+						end = i;
+						found.push([start,end]);
+						start = 0;
+						j = 0;
+						continue;
+					}
+					j++;
+				}
+			}
+		}
+		else{
+			for( i = 0; i < txt.length; i++){
+				if(txt[i].toLowerCase() == str[0]){
+					found.push([i, i]);
+				}
 			}
 		}
 		textarea.focus();
