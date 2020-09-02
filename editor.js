@@ -11,8 +11,10 @@ var isFirefox = typeof InstallTrigger !== 'undefined';
 window.continueArr = false;
 window.arrcount = -1;
 window.found = [];
+var occured = false;
+var check = true;
 if(isFirefox){
-	alert("You are on an unsupported browser.\nThe buttons 'Undo' and 'Redo' in the 'Edit' section will not work.\nCTRL+Z and CTRl+Y still work (also avoid using TABs)")
+	alert("You are on an unsupported browser.\nThe buttons 'Undo' and 'Redo' in the 'Edit' section will not work.\nCTRL+Z and CTRl+Y still work (also avoid using TABs)\nCurrently FireFox has a bug that might break the whole editor")
 }
 function runTextAsJS(){
 	eval(textarea.value);
@@ -37,8 +39,10 @@ function checkKey(event){
 	code = event.keyCode;
 	if(key == "Tab" || code == 9){
 		event.preventDefault();
-		if(isFirefox) { 
-			textarea.value += "\t";
+		if(isFirefox) {
+            var s = textarea.selectionStart;
+            textarea.value = textarea.value.substring(0,s) + '\t' + textarea.value.substring(s,textarea.value.length);
+            textarea.selectionEnd = s+1; 
 		}
 		else{
 			document.execCommand('insertText', false, "\t");
@@ -61,17 +65,27 @@ function checkKey(event){
 		if(textarea.value[textarea.selectionStart] == undefined){
 			scroll = true;
 		}
-		event.preventDefault();
-		tabs = 0;
+		if(check){
+			tabs = 0;
+		}
+		else{
+			tabs--;
+		}
 		i = textarea.selectionStart - 1;
-		while(textarea.value[i] != "\n" && i >= 0){
-			if(textarea.value[i] == "\t" || textarea.value[i] == "{"){
-				tabs++;
+		occured = false;
+		if(check){
+			while(textarea.value[i] != "\n" && i >= 0){
+				if(textarea.value[i] == "\t" || textarea.value[i] == "{"){
+					tabs++;
+					if(textarea.value[i] == "{"){
+						occured = true;
+					}
+				}
+				else if(textarea.value[i] == "}" && occured == false){
+					tabs--;
+				}
+				i--;
 			}
-			else if(textarea.value[i] == "}"){
-				tabs--;
-			}
-			i--;
 		}
 		if(isFirefox){
 			textbefore = textarea.value.substring(0, textarea.selectionStart);
@@ -93,6 +107,22 @@ function checkKey(event){
 		}
 		if(scroll){
 			textarea.scrollTop = textarea.scrollHeight;
+		}
+		check = true;
+	}
+	else if(event.key == "}"){
+		if(textarea.value[textarea.selectionStart - 1] == "\t"){
+			if(isFirefox){
+				textbefore = textarea.value.substring(0, textarea.selectionStart - 1);
+				textafter = textarea.value.substring(textarea.selectionStart, textarea.value.length);
+				textarea.value = textbefore + textafter;
+			}
+			else{
+				textarea.selectionStart = textarea.selectionStart - 1;
+				textarea.selectionEnd = textarea.selectionStart;
+				document.execCommand('insertText', false, "\b");
+			}
+			check = false;
 		}
 	}
 }
@@ -145,5 +175,4 @@ function find(str,event, input){
 			continueArr = true;
 		}
 	}
-	window.laststr = str;
 }
